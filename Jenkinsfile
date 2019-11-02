@@ -2,14 +2,19 @@ pipeline {
     agent any
 
     stages {
+         stage('Checkout') {
+            steps {
+                git 'https://github.com/rraspaud/integration.git'
+            }
+        }
         stage('Build') {
             steps {
-                echo 'Building..'
+                bat label: '', script: 'mvn install'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                bat label: '', script: 'mvn test'
             }
         }
         stage('Deploy') {
