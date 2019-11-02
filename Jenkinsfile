@@ -9,12 +9,16 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat label: '', script: 'mvn install'
+                dir('maven-demo-1') {
+                    bat label: '', script: 'mvn install'
+                }
             }
         }
         stage('Test') {
             steps {
-                bat label: '', script: 'mvn test'
+                dir('maven-demo-1') {
+                    bat label: '', script: 'mvn test'
+                }
             }
         }
         stage('Deploy') {
