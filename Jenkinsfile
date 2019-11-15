@@ -38,6 +38,7 @@ pipeline {
        stage('Deploy') {
             steps {
                 script {
+                     dir('maven-demo-1') {
                     // Read POM xml file using 'readMavenPom' step , this step 'readMavenPom' is included in: https://plugins.jenkins.io/pipeline-utility-steps
                     pom = readMavenPom file: "pom.xml";
                     // Find built artifact under target folder
@@ -65,14 +66,15 @@ pipeline {
                                 file: artifactPath,
                                 type: pom.packaging],
                                 // Lets upload the pom.xml file for additional information for Transitive dependencies
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: "pom.xml",
-                                type: "pom"]
-                            ]
-                        );
-                    } else {
-                        error "*** File: ${artifactPath}, could not be found";
+                                    [artifactId: pom.artifactId,
+                                    classifier: '',
+                                    file: "pom.xml",
+                                    type: "pom"]
+                                ]
+                            );
+                        } else {
+                            error "*** File: ${artifactPath}, could not be found";
+                        }
                     }
                 }
             }
