@@ -4,8 +4,6 @@ pipeline {
         environment {
         // This can be nexus3 or nexus2
         NEXUS_VERSION = "nexus3"
-        // This can be http or https
-        NEXUS_PROTOCOL = "http"
         // Where your Nexus is running
         NEXUS_URL = "localhost:8081"
         // Repository where we will upload the artifact
@@ -51,7 +49,6 @@ pipeline {
                     if(artifactExists) {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
                         nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
                             protocol: NEXUS_PROTOCOL,
                             nexusUrl: NEXUS_URL,
                             groupId: pom.groupId,
