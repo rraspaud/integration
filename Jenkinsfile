@@ -31,6 +31,7 @@ pipeline {
             steps {
                 dir('maven-demo-1') {
                     bat label: '', script: 'mvn test'
+                    
                 }
             }
         }
